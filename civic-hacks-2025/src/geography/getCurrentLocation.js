@@ -11,7 +11,19 @@ const getLocation = () => {
 }
 
 const retrieveCoordinates = (position) => {
-  console.log(position.coords.latitude + ", " + position.coords.longitude )
+
+  const latitudeRange = {
+    lat1: Math.round(position.coords.latitude * 10)/10,
+    lat2: Math.round(position.coords.latitude * 10)/10 + 0.5
+  }
+
+  const longitudeRange = {
+    lon1: Math.round(position.coords.longitude * 10)/10,
+    lon2: Math.round(position.coords.longitude * 10)/10 + 0.5
+  }
+  
+  console.log(latitudeRange, longitudeRange)
+  return latitudeRange, longitudeRange
 }
 
 export default getLocation
