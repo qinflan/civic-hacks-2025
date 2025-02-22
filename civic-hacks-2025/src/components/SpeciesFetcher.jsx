@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SpeciesDisplay from './SpeciesDisplay';
 
 const SpeciesFetcher = () => {
@@ -11,7 +11,7 @@ const SpeciesFetcher = () => {
       try {
         const response = await fetch('https://api.gbif.org/v1/species/search?limit=10');
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Network did not respond!');
         }
         const data = await response.json();
         setSpecies(data.results);
@@ -25,9 +25,12 @@ const SpeciesFetcher = () => {
     fetchSpecies();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
-
+  if (loading){
+    return <div>Loading...</div>;
+  }
+  if (error){
+    return <div>{error}</div>;
+  }
   return <SpeciesDisplay species={species} />;
 };
 
