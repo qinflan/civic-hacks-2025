@@ -30,37 +30,117 @@ const SearchEngine = () => {
     }
   }, [query, nameList]);
 
-  // Function to handle click and update URL
-  const handleSelect = (name) => {
+  // Function to handle click and update URL hash without opening a new tab
+  const handleSelect = (name, event) => {
+    event.preventDefault(); // Prevents unwanted navigation
     setQuery(name);
-    window.location.hash = `#${encodeURIComponent(name)}`;
+    window.history.pushState(null, null, `#${encodeURIComponent(name)}`); // Updates URL hash without refreshing
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md space-y-4 relative">
-      <h2 className="text-xl font-bold text-gray-900">🔍 Search List</h2>
-      <input
-        type="text"
-        placeholder="Type to search..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-      />
-      
-      {/* Dropdown Menu (Now 100% Vertical) */}
-      {filteredData.length > 0 && (
-        <div className="absolute left-0 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto z-10 flex flex-col">
-          {filteredData.map((item, index) => (
-            <button
-              key={index}
-              className="block w-full text-left p-3 bg-white text-gray-700 cursor-pointer hover:bg-blue-100 border-b border-gray-200 last:border-none"
-              onClick={() => handleSelect(item)}
-            >
-              {item}
-            </button>
-          ))}
+    <div>
+      {/* Embedded CSS inside <style> tag */}
+      <style>
+        {`
+          /* Search Container */
+          .search-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+
+          /* Search Box */
+          .search-box {
+            position: relative;
+            width: 100%;
+          }
+
+          /* Search Input */
+          .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            outline: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+          }
+
+          .search-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+          }
+
+          /* Dropdown */
+          .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 5px;
+            z-index: 10;
+          }
+
+          /* Dropdown Item */
+          .dropdown-item {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: white;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+          }
+
+          .dropdown-item:hover {
+            background: #f1f1f1;
+          }
+        `}
+      </style>
+
+      <div className="search-container">
+        <h2 className="search-title">Search</h2>
+        <div className="search-box">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="search-input"
+          />
+
+          {/* Dropdown Menu */}
+          {filteredData.length > 0 && (
+            <div className="dropdown">
+              {filteredData.map((item, index) => (
+                <button
+                  key={index}
+                  className="dropdown-item"
+                  onClick={(e) => handleSelect(item, e)}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
