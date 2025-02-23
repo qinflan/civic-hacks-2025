@@ -1,6 +1,4 @@
-import React from "react";
 import styled from "styled-components";
-import SelectLocation from "../geography/selectLocation";
 
 const SpeciesGrid = styled.div`
   display: flex;

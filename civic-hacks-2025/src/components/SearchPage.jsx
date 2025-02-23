@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import getOccurrenceByGeo from "../API/getOccurrenceByGeo.js";
-
 
 const SearchPage = () => {
   const [topics, setTopics] = useState([]);
@@ -29,7 +28,7 @@ const SearchPage = () => {
     } else {
       setFilteredData([]);
     }
-  }, [query, nameList]);
+  }, [query]);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -40,9 +39,7 @@ const SearchPage = () => {
   const handleSelect = (name, event) => {
     event.preventDefault();
     setQuery(name);
-    const encodedName = encodeURIComponent(name);
-    window.history.pushState(null, null, `/#${encodedName}`);
-    scrollToSection(encodedName);
+    scrollToSection(name);
   };
   
   

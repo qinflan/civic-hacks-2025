@@ -1,4 +1,3 @@
-import React from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa"; // Import LinkedIn and GitHub icons
 import styled from "styled-components";
 
@@ -155,18 +154,11 @@ const AboutPage = () => {
         <Section>
           <h2>Citations</h2>
           <p>
-            Our Application uses the{" "}
+            Our Application uses the data from{" "}
             <StyledLink href="https://techdocs.gbif.org/en/openapi/v1/species#/Species/getNameUsageDistributions" target="_blank" rel="noopener noreferrer">
               GBIF API reference
             </StyledLink>{" "}
             for mapping and geospatial analysis.
-          </p>
-          <p>
-            As well as {" "}
-            <StyledLink href="https://data.huh.harvard.edu/databases/" target="_blank" rel="noopener noreferrer">
-              Harvard University Herbaria & Libraries
-            </StyledLink>{" "}
-            for database and specimens.
           </p>
         </Section>
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import SearchPage from './SearchPage';
@@ -114,9 +114,6 @@ const Layout = ({ children }) => {
         <NavList>
           <NavItem>
             <StyledLink to="/" onClick={toggleMenu}>Home</StyledLink>
-          </NavItem>
-          <NavItem>
-            <StyledLink to="/search" onClick={toggleMenu}>Search</StyledLink>
           </NavItem>
           <NavItem>
             <StyledLink to="/about" onClick={toggleMenu}>About</StyledLink>

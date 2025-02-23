@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import SpeciesDisplay from './SpeciesDisplay';
 import getLocation from '../geography/getCurrentLocation';
 import SelectLocation from '../geography/selectLocation';
@@ -54,6 +54,7 @@ const SpeciesFetcher = () => {
           return {
             key: occurrence.key,
             scientificName: occurrence.scientificName,
+            genericName: occurrence.genericName,
             imageUrl: occurrence.media && occurrence.media.length > 0 ? occurrence.media[0]?.identifier : null,
             vernacularName: englishName,
             decimalLatitude: occurrence.decimalLatitude,
