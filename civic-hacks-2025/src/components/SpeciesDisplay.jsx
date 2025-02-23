@@ -1,17 +1,50 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+
+const SpeciesGrid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #ebdecb;
+`;
+
 
 const SpeciesCard = styled.div`
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid black;
+  border-radius: 25px;
   padding: 16px;
   margin: 16px;
-  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    transform: scale(1.05);
+    cursor: pointer; 
+    box-shadow: 0 10px 20px grey;
+    transition: all 0.3s ease-in-out;
+  }
+
+  background-color: #d0e6f0;
+  
+  width: 300px;
+  cursor: pointer;
+`;
+
+const SpeciesImage = styled.img`
+  max-width: 200px;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 16px;
 `;
 
 const SpeciesName = styled.h2`
   color: #333;
   margin-bottom: 8px;
+  text-align: center;
 `;
 
 const SpeciesInfo = styled.p`
@@ -26,22 +59,29 @@ const AdditionalInfo = styled.div`
 
 const SpeciesDisplay = ({ species }) => {
   return (
-    <div>
+    <SpeciesGrid>
       {species.map((s) => (
-        <SpeciesCard key={s.key}>
+        <SpeciesCard key={s.key} id={s.genericName}>
+          {s.imageUrl && <SpeciesImage src={s.imageUrl} alt={s.scientificName} />}
           <SpeciesName>{s.scientificName}</SpeciesName>
+          <SpeciesInfo>Common Name: {s.vernacularName}</SpeciesInfo>
           <SpeciesInfo>Kingdom: {s.kingdom}</SpeciesInfo>
           <SpeciesInfo>Phylum: {s.phylum}</SpeciesInfo>
           <SpeciesInfo>Class: {s.class}</SpeciesInfo>
+          <SpeciesInfo>Establisment Means: 
+            {s.establishment == "INTRODUCED" ? " INVASIVE": " NATIVE" }
+          </SpeciesInfo>
           <AdditionalInfo>
-            <p>Conservation Status: {s.iucnRedListCategory || 'Unknown'}</p>
-            <p>Habitat: {s.habitats?.join(', ') || 'Not specified'}</p>
-            <p>Last Updated: {new Date(s.modified).toLocaleDateString()}</p>
+            <p>Location: {s.decimalLatitude}, {s.decimalLongitude}</p>
+            <p>Country: {s.country}</p>
           </AdditionalInfo>
         </SpeciesCard>
       ))}
-    </div>
+    </SpeciesGrid>
   );
+};
+
+export default SpeciesDisplay;
 };
 
 export default SpeciesDisplay;
