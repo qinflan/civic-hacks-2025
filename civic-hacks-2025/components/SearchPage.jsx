@@ -14,22 +14,23 @@ const SearchPage = () => {
   }, []);
 
   // Remove duplicates using Set
-  const nameList = [...new Set(topics.map((topic) => topic.genericName))];
+  const nameList = useMemo(() => [...new Set(topics.map((topic) => topic.genericName))], [topics]);
 
-  const [query, setQuery] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
+const [query, setQuery] = useState("");
+const [filteredData, setFilteredData] = useState([]);
 
-  useEffect(() => {
-    if (query) {
-      setFilteredData(
-        nameList.filter((item) =>
-          item.toLowerCase().includes(query.toLowerCase())
-        )
-      );
-    } else {
-      setFilteredData([]);
-    }
-  }, [query, nameList]);
+useEffect(() => {
+  if (query) {
+    setFilteredData(
+      nameList
+        .filter((item) => item.toLowerCase().includes(query.toLowerCase()))
+        .slice(0, 10) // Limit results to 10
+    );
+  } else {
+    setFilteredData([]);
+  }
+}, [query, nameList]);
+
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
