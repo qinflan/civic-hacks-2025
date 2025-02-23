@@ -82,7 +82,5 @@ const SpeciesDisplay = ({ species }) => {
 };
 
 export default SpeciesDisplay;
-};
 
-export default SpeciesDisplay;
 
