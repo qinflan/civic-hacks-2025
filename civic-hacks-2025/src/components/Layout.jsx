@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-// import SearchPage from './SearchPage';
+import SearchPage from './SearchPage';
 
 const Header = styled.header`
   background-color: #3A2F27;
@@ -94,7 +94,7 @@ const Layout = ({ children }) => {
     <>
       <Header>
         <Title>Species Explorer</Title>
-        {/* <SearchPage/> */}
+        <SearchPage/>
         <HamburgerIcon onClick={toggleMenu} isOpen={isOpen}>
           <span></span>
           <span></span>
