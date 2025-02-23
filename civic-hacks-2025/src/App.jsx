@@ -10,7 +10,6 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<SpeciesFetcher />} />
-          {/* <Route path="/search" element={<SearchPage/>} /> */}
           <Route path="/about" element={<AboutPage/>}/>
         </Routes>
       </Layout>

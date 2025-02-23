@@ -53,21 +53,12 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: center;
   background-color: #3A2F27;
-  position: absolute;
-  top: 100px; /* Adjust as needed */
-  
-  right: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
-  
-  /* Set a smaller height for the menu */
-  height: auto; /* Allow it to fit its content */
-  
-  max-height: calc(100vh - 80px); /* Full height minus header height */
-  
-  width: 200px; /* Set a smaller width for the menu */
-  
-  transition: right 0.3s ease-in-out, max-height 0.3s ease-in-out; /* Smooth transition for opening/closing */
-  
-  overflow-y: auto; /* Allow scrolling if content exceeds max-height */
+  position: fixed;  // Change to fixed
+  top: 78px;  // Add top positioning
+  right: ${({ isOpen }) => (isOpen ? '0' : '-200px')};  // Change left to right
+  width: 200px; // Set a smaller width for the menu
+  transition: right 0.3s ease-in-out; // Smooth transition for opening/closing
+  border-bottom: 5%;
 `;
 
 const NavList = styled.ul`
