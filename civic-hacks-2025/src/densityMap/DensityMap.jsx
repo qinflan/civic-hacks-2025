@@ -32,7 +32,7 @@ export default function DensityMap({taxonKey}) {
     map.addLayer(layer);
 
     return () => map.setTarget(undefined);
-  }, [taxonKey]);
+  }, []);
 
   return <div ref={mapRef} style={{ width: "80vw", height: "65vh" }} />;
 }

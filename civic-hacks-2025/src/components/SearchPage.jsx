@@ -29,7 +29,7 @@ const SearchPage = () => {
     } else {
       setFilteredData([]);
     }
-  }, [query, nameList]);
+  }, [query]);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);

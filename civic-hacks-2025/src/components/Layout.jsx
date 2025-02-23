@@ -107,6 +107,9 @@ const Layout = ({ children }) => {
             <StyledLink to="/" onClick={toggleMenu}>Home</StyledLink>
           </NavItem>
           <NavItem>
+            <StyledLink to="/map" onClick={toggleMenu}>Map</StyledLink>
+          </NavItem>
+          <NavItem>
             <StyledLink to="/about" onClick={toggleMenu}>About</StyledLink>
           </NavItem>
         </NavList>
