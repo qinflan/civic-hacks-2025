@@ -12,23 +12,21 @@ const SpeciesGrid = styled.div`
 `;
 
 const SpeciesCard = styled.div`
-  border: 1px solid black;
-  border-radius: 25px;
+  border: 1px solid #CBC1B1;
+  border-radius: 14px;
   padding: 16px;
   margin: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: 0.3s;
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
     cursor: pointer; 
-    box-shadow: 0 10px 20px grey;
     transition: all 0.3s ease-in-out;
   }
-
-  background-color: #d0e6f0;
-  
+  background-color: #f5e9d8;
   width: 300px;
   cursor: pointer;
 `;

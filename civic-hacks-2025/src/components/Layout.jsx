@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Header = styled.header`
-  background-color: #282c34;
+  background-color: #3A2F27;
   padding: 20px;
   display: flex;
   justify-content: space-between;
@@ -51,7 +51,7 @@ const Nav = styled.nav`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #20232a;
+  background-color: #3A2F27;
   position: absolute;
   top: 100px; /* Adjust as needed */
   

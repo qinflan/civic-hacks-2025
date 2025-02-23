@@ -87,11 +87,7 @@ const SelectLocation = () => {
 
   else {
     return (
-      <div className="relative m-auto flex justify-center">
-
-
-
-        <div className="m-auto w-full flex items-center justify-center">
+      <div>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             center={position || { lat: 37.7749, lng: -122.4194 }} // default san francisco
@@ -101,7 +97,6 @@ const SelectLocation = () => {
           >
             {position && <Marker position={position} />}
             <Autocomplete onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
-              
                 <input
                   type="text"
                   placeholder="Search location..."
@@ -119,7 +114,6 @@ const SelectLocation = () => {
             </Autocomplete>
           </GoogleMap>
         </div>
-      </div>
     );
   };
 }
