@@ -1,5 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import SelectLocation from "../geography/selectLocation";
 
 const SpeciesGrid = styled.div`
   display: flex;
@@ -9,7 +10,6 @@ const SpeciesGrid = styled.div`
   padding: 20px;
   background-color: #ebdecb;
 `;
-
 
 const SpeciesCard = styled.div`
   border: 1px solid black;
@@ -59,6 +59,10 @@ const AdditionalInfo = styled.div`
 
 const SpeciesDisplay = ({ species }) => {
   return (
+    <div>
+      <div className="w-full flex items-center justify-self-center">
+      <SelectLocation/>
+      </div>
     <SpeciesGrid>
       {species.map((s) => (
         <SpeciesCard key={s.key} id={s.genericName}>
