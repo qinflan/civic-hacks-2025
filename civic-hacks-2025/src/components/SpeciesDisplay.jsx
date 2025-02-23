@@ -82,6 +82,7 @@ const SpeciesDisplay = ({ species }) => {
         </SpeciesCard>
       ))}
     </SpeciesGrid>
+    </div>
   );
 };
 
