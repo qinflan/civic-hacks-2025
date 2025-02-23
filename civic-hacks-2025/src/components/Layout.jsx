@@ -93,7 +93,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header>
-        <Title>Species Explorer</Title>
+        <Title>EcoQuest</Title>
         <SearchPage/>
         <HamburgerIcon onClick={toggleMenu} isOpen={isOpen}>
           <span></span>
