@@ -26,7 +26,7 @@ export default function DensityMap({taxonKey}) {
     const layer = new VectorTileLayer({
       source: new VectorTileSource({
         format: new MVT(),
-        url:'https://api.gbif.org/v2/map/occurrence/density/{z}/{x}/{y}.mvt?basisOfRecord=OCCURRENCE,OBSERVATION&taxonKey=' + taxonKey.taxonKey
+        url:'https://api.gbif.org/v2/map/occurrence/density/{z}/{x}/{y}.mvt?basisOfRecord=OCCURRENCE,OBSERVATION&taxonKey=' + taxonKey
       }),
     });
     map.addLayer(layer);
