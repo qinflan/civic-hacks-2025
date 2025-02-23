@@ -1,15 +1,12 @@
-import './App.css'
-import getLocation from './geography/getCurrentLocation'
-import selectLocation from './geography/selectLocation'
-import { MapContainer } from 'react-leaflet'
+import './App.css';
+import SelectLocation from './geography/selectLocation'; 
 
 function App() {
-
-  getLocation()
   return (
-    selectLocation()
-  )
-
+    <div className="App">
+      <SelectLocation /> 
+    </div>
+  );
 }
 
-export default App
+export default App;
