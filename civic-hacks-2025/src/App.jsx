@@ -1,11 +1,21 @@
-import './App.css';
-import SelectLocation from './geography/selectLocation'; 
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import SpeciesFetcher from './components/SpeciesFetcher';
+import SearchPage from './components/SearchPage';
+// import AboutPage from './components/AboutPage';
 
 function App() {
   return (
-    <div className="App">
-      <SelectLocation /> 
-    </div>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<SpeciesFetcher />} />
+          <Route path="/search" element={<SearchPage/>} />
+          <Route path="/about" element={<AboutPage/>} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
 
