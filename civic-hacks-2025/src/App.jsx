@@ -1,10 +1,10 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import SpeciesFetcher from './components/SpeciesFetcher';
 import AboutPage from './components/AboutPage';
 
 function App() {
+
   return (
     <Router>
       <Layout>

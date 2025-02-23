@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 import getOccurrenceByGeo from "../API/getOccurrenceByGeo.js";
 
-const SearchPage = () => {
-  const [topics, setTopics] = useState([]);
+// const SearchPage = () => {
+//   const [topics, setTopics] = useState([]);
 
-  useEffect(() => {
-    getOccurrenceByGeo(
-      { lat1: 42, lat2: 42.5 },
-      { lon1: -71, lon2: -70.5 },
-      setTopics
-    );
-  }, []);
+//   useEffect(() => {
+//     getOccurrenceByGeo(
+//       { lat1: 42, lat2: 42.5 },
+//       { lon1: -71, lon2: -70.5 },
+//       setTopics
+//     );
+//   }, []);
 
-  // Remove duplicates using Set
-  const nameList = [...new Set(topics.map((topic) => topic.genericName))];
+//   // Remove duplicates using Set
+//   const nameList = [...new Set(topics.map((topic) => topic.genericName))];
 
-  const [query, setQuery] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
+//   const [query, setQuery] = useState("");
+//   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     if (query) {
@@ -30,10 +30,10 @@ const SearchPage = () => {
     }
   }, [query]);
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
+//   const scrollToSection = (id) => {
+//     const element = document.getElementById(id);
+//     element?.scrollIntoView({ behavior: "smooth" });
+//   };
 
   // Function to handle click, update URL hash, and scroll to section
   const handleSelect = (name, event) => {
@@ -43,120 +43,120 @@ const SearchPage = () => {
   };
   
   
-  return (
-    <div>
-      {/* Embedded CSS inside <style> tag */}
-      <style>
-       {`
-         /* Search Container */
-         .search-container {
-           max-width: 350px;
-           margin: 0 auto;
-           background: none;
-           padding: 20px;
-           border-radius: 12px;
-           box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        //    width: 350px;
-        //    position: relative;
-        //    display: flex;
-        //    flex-direction: column;
-        //    align-items: center;
-         }
+//   return (
+//     <div>
+//       {/* Embedded CSS inside <style> tag */}
+//       <style>
+//        {`
+//          /* Search Container */
+//          .search-container {
+//            max-width: 350px;
+//            margin: 0 auto;
+//            background: none;
+//            padding: 20px;
+//            border-radius: 12px;
+//            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+//         //    width: 350px;
+//         //    position: relative;
+//         //    display: flex;
+//         //    flex-direction: column;
+//         //    align-items: center;
+//          }
 
 
-         /* Search Box */
-         .search-box {
-           position: relative;
-           width: 100%;
-         }
+//          /* Search Box */
+//          .search-box {
+//            position: relative;
+//            width: 100%;
+//          }
 
 
-         /* Search Input */
-         .search-input {
-           width: 100%;
-           padding: 12px 45px 12px 15px;
-           border: 2px solid #ddd;
-           border-radius: 30px;
-           outline: none;
-           font-size: 16px;
-           transition: all 0.3s ease;
-           box-sizing: border-box;
-         }
+//          /* Search Input */
+//          .search-input {
+//            width: 100%;
+//            padding: 12px 45px 12px 15px;
+//            border: 2px solid #ddd;
+//            border-radius: 30px;
+//            outline: none;
+//            font-size: 16px;
+//            transition: all 0.3s ease;
+//            box-sizing: border-box;
+//          }
 
 
-         .search-input:focus {
-           border-color: #007bff;
-           box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
-         }
+//          .search-input:focus {
+//            border-color: #007bff;
+//            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+//          }
 
 
-         /* Dropdown */
-         .dropdown {
-           position: absolute;
-           top: 100%;
-           left: 0;
-           width: 100%;
-           background: white;
-           border: 1px solid #ddd;
-           border-radius: 8px;
-           box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-           max-height: 150px;
-           overflow-y: auto;
-           margin-top: 5px;
-           z-index: 10;
-         }
+//          /* Dropdown */
+//          .dropdown {
+//            position: absolute;
+//            top: 100%;
+//            left: 0;
+//            width: 100%;
+//            background: white;
+//            border: 1px solid #ddd;
+//            border-radius: 8px;
+//            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+//            max-height: 150px;
+//            overflow-y: auto;
+//            margin-top: 5px;
+//            z-index: 10;
+//          }
 
 
-         /* Dropdown Item */
-         .dropdown-item {
-           display: block;
-           width: 100%;
-           padding: 10px;
-           border: none;
-           background: white;
-           text-align: left;
-           font-size: 16px;
-           cursor: pointer;
-           transition: background 0.3s ease;
-         }
+//          /* Dropdown Item */
+//          .dropdown-item {
+//            display: block;
+//            width: 100%;
+//            padding: 10px;
+//            border: none;
+//            background: white;
+//            text-align: left;
+//            font-size: 16px;
+//            cursor: pointer;
+//            transition: background 0.3s ease;
+//          }
 
 
-         .dropdown-item:hover {
-           background: #f1f1f1;
-         }
-       `}
-     </style>
+//          .dropdown-item:hover {
+//            background: #f1f1f1;
+//          }
+//        `}
+//      </style>
 
 
 
-      <div className="search-container">
-        <div className="search-box">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="search-input"
-          />
+//       <div className="search-container">
+//         <div className="search-box">
+//           <input
+//             type="text"
+//             placeholder="Search..."
+//             value={query}
+//             onChange={(e) => setQuery(e.target.value)}
+//             className="search-input"
+//           />
 
-          {/* Dropdown Menu */}
-          {filteredData.length > 0 && (
-            <div className="dropdown">
-              {filteredData.map((item, index) => (
-                <button
-                  key={index}
-                  className="dropdown-item"
-                  onClick={(e) => handleSelect(item, e)}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
+//           {/* Dropdown Menu */}
+//           {filteredData.length > 0 && (
+//             <div className="dropdown">
+//               {filteredData.map((item, index) => (
+//                 <button
+//                   key={index}
+//                   className="dropdown-item"
+//                   onClick={(e) => handleSelect(item, e)}
+//                 >
+//                   {item}
+//                 </button>
+//               ))}
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
-export default SearchPage;
+// export default SearchPage;
