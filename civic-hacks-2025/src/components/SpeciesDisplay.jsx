@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import SelectLocation from "../geography/selectLocation";
 
 const SpeciesCard = styled.div`
   border: 1px solid #ddd;
@@ -27,6 +28,10 @@ const AdditionalInfo = styled.div`
 const SpeciesDisplay = ({ species }) => {
   return (
     <div>
+      <div className="w-full flex items-center justify-self-center">
+      <SelectLocation/>
+      </div>
+
       {species.map((s) => (
         <SpeciesCard key={s.key}>
           <SpeciesName>{s.scientificName}</SpeciesName>
