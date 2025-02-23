@@ -14,8 +14,8 @@ const SpeciesFetcher = () => {
   const customStyles = {
     content: {
       top: '50%',
-      height: '100vh',
-      width: '100vw',
+      height: '80vh',
+      width: '70vw',
       left: '50%',
       right: 'auto',
       bottom: 'auto',
