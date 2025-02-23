@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import getLocation from './getCurrentLocation';
+import React, { useState, useRef } from 'react';
 import { GoogleMap, Marker, useJsApiLoader, Autocomplete } from '@react-google-maps/api';
 
 // Google Maps API key from environment variables
@@ -29,59 +28,39 @@ const mapOptions = {
   ],
 };
 
-const SelectLocation = () => {
+const SelectLocation = ({updatePosition}) => {
   const [position, setPosition] = useState({ lat: 37.7749, lng: -122.4194 }); // default san francisco
   const [autocomplete, setAutocomplete] = useState(null);
+  const mapRef = useRef(null);  // Keep a ref for the map
+
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: apiKey,
     libraries,
   });
 
-  useEffect(() => {
-    const fetchLocation = async () => {
-      try {
-        const { lat, lon } = await getLocation();
-        setPosition({ lat: lat.lat1, lng: lon.lon1 });
-        console.log("Initial Location: ", lat.lat1, lon.lon1);
-      } catch (error) {
-        console.error('Error fetching location:', error);
-      }
-    };
-
-    fetchLocation();
-  }, []);
-
   const onPlaceChanged = () => {
     if (autocomplete) {
       const place = autocomplete.getPlace();
       if (place.geometry) {
-        const lat1 = place.geometry.location.lat();
-        const lng1 = place.geometry.location.lng();
+        const lat = place.geometry.location.lat();
+        const lng = place.geometry.location.lng();
 
-        // Round to the nearest tenth
-        const roundedLat1 = Math.round(lat1 * 10) / 10;
-        const roundedLng1 = Math.round(lng1 * 10) / 10;
-        const roundedLat2 = Math.round((roundedLat1 + 0.5) * 10) / 10;
-        const roundedLng2 = Math.round((roundedLng1 + 0.5) * 10) / 10;
+        const lat1 = Math.round(lat * 10) / 10;
+        const lon1 = Math.round(lng * 10) / 10;
+        const lat2 = Math.round((lat1 + 0.5) * 10) / 10;
+        const lon2 = Math.round((lon1 + 0.5) * 10) / 10;
 
-        // Update state
-        setPosition({
-          lat: roundedLat1,
-          lng: roundedLng1,
-          lat2: roundedLat2,
-          lng2: roundedLng2
-        });
-
-        console.log("Updated Position:", {
-          lat1: roundedLat1,
-          lng1: roundedLng1,
-          lat2: roundedLat2,
-          lng2: roundedLng2
-        });
+        setPosition({ lat: lat1, lng: lon1 });
+        updatePosition({ lat: lat1, lng: lon1, lat1, lat2, lon1, lon2 });
+        if (mapRef.current) {
+          mapRef.current.panTo({ lat: lat1, lng: lon1 });  // Smoothly pan to the new position
+        }
       }
     }
   };
+
+  const center = position;
 
   if (!isLoaded) return <p>Loading map...</p>;
 
@@ -90,10 +69,21 @@ const SelectLocation = () => {
       <div>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
-            center={position || { lat: 37.7749, lng: -122.4194 }} // default san francisco
+            center={center}
             zoom={13}
             options={mapOptions}
-            onClick={(e) => setPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() })}
+            onClick={(e) => {
+              const lat = e.latLng.lat();
+              const lng = e.latLng.lng();
+    
+              const lat1 = Math.round(lat * 10) / 10;
+              const lon1 = Math.round(lng * 10) / 10;
+              const lat2 = Math.round((lat1 + 0.5) * 10) / 10;
+              const lon2 = Math.round((lon1 + 0.5) * 10) / 10;
+    
+              setPosition({ lat: lat1, lng: lon1 });
+              updatePosition({ lat: lat1, lng: lon1, lat1, lat2, lon1, lon2 });
+            }}
           >
             {position && <Marker position={position} />}
             <Autocomplete onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>

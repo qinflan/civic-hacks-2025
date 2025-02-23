@@ -58,9 +58,6 @@ const AdditionalInfo = styled.div`
 const SpeciesDisplay = ({ species }) => {
   return (
     <div>
-      <div className="w-full flex items-center justify-self-center">
-      <SelectLocation/>
-      </div>
     <SpeciesGrid>
       {species.map((s) => (
         <SpeciesCard key={s.key} id={s.genericName}>
