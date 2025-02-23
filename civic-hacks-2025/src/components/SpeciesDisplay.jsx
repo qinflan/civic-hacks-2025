@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import SelectLocation from "../geography/selectLocation";
 
@@ -55,7 +54,7 @@ const AdditionalInfo = styled.div`
   font-style: italic;
 `;
 
-const SpeciesDisplay = ({ species }) => {
+const SpeciesDisplay = ({ species, openModal }) => {
   return (
     <div>
       <div className="w-full flex items-center justify-self-center">
@@ -63,7 +62,7 @@ const SpeciesDisplay = ({ species }) => {
       </div>
     <SpeciesGrid>
       {species.map((s) => (
-        <SpeciesCard key={s.key} id={s.genericName}>
+        <SpeciesCard key={s.key} id={s.genericName} onClick={openModal}>
           {s.imageUrl && <SpeciesImage src={s.imageUrl} alt={s.scientificName} />}
           <SpeciesName>{s.scientificName}</SpeciesName>
           <SpeciesInfo>Common Name: {s.vernacularName}</SpeciesInfo>

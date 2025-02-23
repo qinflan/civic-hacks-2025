@@ -1,10 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import SpeciesDisplay from './SpeciesDisplay';
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
 
 const SpeciesFetcher = () => {
   const [speciesData, setSpeciesData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  function openModal() {
+    setModalOpen(true);
+  }
+  function closeModal() {
+    setModalOpen(false);
+  }
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
 
   useEffect(() => {
     const fetchSpeciesData = async () => {
@@ -40,7 +60,6 @@ const SpeciesFetcher = () => {
                   isnative = element.establishmentMeans;
                 }
               });
-              console.log(isnative);
             }
 
 
@@ -90,7 +109,16 @@ const SpeciesFetcher = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
-  return <SpeciesDisplay species={speciesData} />;
+  return (
+  <Modal
+    isOpen={modalOpen}
+    onRequestClose={closeModal}
+    contentLabel="Occurrence Density Map"
+    style={customStyles}
+  >
+    <SpeciesDisplay species={speciesData} openModal={openModal}/>
+  </Modal>
+  )
 };
 
 export default SpeciesFetcher;
