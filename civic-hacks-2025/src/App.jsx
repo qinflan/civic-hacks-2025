@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SpeciesFetcher />} />
           <Route path="/search" element={<SearchPage/>} />
-          <Route path="/about" element={<AboutPage/>} />
+          {/* <Route path="/about" element={<AboutPage/>} /> */}
         </Routes>
       </Layout>
     </Router>
