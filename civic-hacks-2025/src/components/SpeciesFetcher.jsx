@@ -2,22 +2,20 @@ import React, { useState, useEffect } from 'react';
 import SpeciesDisplay from './SpeciesDisplay';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+import DensityMap from '../densityMap/DensityMap';
 
 const SpeciesFetcher = () => {
   const [speciesData, setSpeciesData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [modalOpen, setModalOpen] = useState(false);
-  function openModal() {
-    setModalOpen(true);
-  }
-  function closeModal() {
-    setModalOpen(false);
-  }
+  const [selectedSpecies, setSelectedSpecies] = useState(null);
+
   const customStyles = {
     content: {
       top: '50%',
+      height: '100vh',
+      width: '100vw',
       left: '50%',
       right: 'auto',
       bottom: 'auto',
@@ -26,24 +24,34 @@ const SpeciesFetcher = () => {
     },
   };
 
+  const openModal = (species) => {
+    setSelectedSpecies(species);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedSpecies(null);
+  };
+
   useEffect(() => {
     const fetchSpeciesData = async () => {
       try {
         // Your GBIF Occurrence API call with specified parameters
         const apiUrl = 'https://api.gbif.org/v1/occurrence/search/?decimalLongitude=-71,-70.5&decimalLatitude=42,42.5&limit=30&coordinateUncertaintyInMeters=0,50';
 
-        const occurrenceResponse = await fetch(apiUrl);  
-        
+        const occurrenceResponse = await fetch(apiUrl);
+
 
         if (!occurrenceResponse.ok) {
           throw new Error('Network response was not ok');
         }
         const occurrenceData = await occurrenceResponse.json();
-        
+
 
         // Process each occurrence to fetch additional data
         const processedData = await Promise.all(occurrenceData.results.map(async (occurrence) => {
-          try{
+          try {
             // Fetch vernacular names if taxonKey exists
             let englishName = 'No English name available';
             let isnative = "";
@@ -51,12 +59,12 @@ const SpeciesFetcher = () => {
               const vernacularResponse = await fetch(`https://api.gbif.org/v1/species/${occurrence.speciesKey}/vernacularNames`);
               const vernacularData = await vernacularResponse.json();
               englishName = vernacularData.results.find(name => name.language === 'eng')?.vernacularName || 'No English name available';
-             
+
               const vernacularResponsesecond = await fetch(`https://api.gbif.org/v1/species/${occurrence.speciesKey}/distributions`);
               const vernacularDatasecond = await vernacularResponsesecond.json();
 
               vernacularDatasecond.results.forEach(element => {
-                if('establishmentMeans' in element){
+                if ('establishmentMeans' in element) {
                   isnative = element.establishmentMeans;
                 }
               });
@@ -65,6 +73,7 @@ const SpeciesFetcher = () => {
 
             return {
               key: occurrence.key,
+              taxonKey: occurrence.taxonKey,
               scientificName: occurrence.scientificName,
               genericName: occurrence.genericName,
               kingdom: occurrence.kingdom,
@@ -76,7 +85,7 @@ const SpeciesFetcher = () => {
               decimalLongitude: occurrence.decimalLongitude,
               country: occurrence.country,
               establishment: isnative
-              
+
             };
           } catch (vernacularError) {
             console.error("Error fetching vernacular names: ", vernacularError);
@@ -109,16 +118,28 @@ const SpeciesFetcher = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
+
+  console.log("Selected species:", selectedSpecies);
+
   return (
-  <Modal
-    isOpen={modalOpen}
-    onRequestClose={closeModal}
-    contentLabel="Occurrence Density Map"
-    style={customStyles}
-  >
-    <SpeciesDisplay species={speciesData} openModal={openModal}/>
-  </Modal>
-  )
+    <div>
+      <SpeciesDisplay species={speciesData} openModal={openModal} />
+
+      <Modal
+        isOpen={modalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Occurrence Density Map"
+        style={customStyles}
+        appElement={document.getElementById('root')}
+      >
+        <h2>{selectedSpecies ? selectedSpecies.vernacularName : 'Species Name'}</h2>
+        {selectedSpecies && selectedSpecies.taxonKey && (
+          <DensityMap taxonKey={selectedSpecies.taxonKey} />
+        )}
+        <button onClick={closeModal}>Close</button>
+      </Modal>
+    </div>
+  );
 };
 
 export default SpeciesFetcher;

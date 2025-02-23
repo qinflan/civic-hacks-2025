@@ -55,6 +55,8 @@ const AdditionalInfo = styled.div`
 `;
 
 const SpeciesDisplay = ({ species, openModal }) => {
+
+  console.log(species)
   return (
     <div>
       <div className="w-full flex items-center justify-self-center">
@@ -62,7 +64,7 @@ const SpeciesDisplay = ({ species, openModal }) => {
       </div>
     <SpeciesGrid>
       {species.map((s) => (
-        <SpeciesCard key={s.key} id={s.genericName} onClick={openModal}>
+        <SpeciesCard key={s.key} id={s.genericName} onClick={() => openModal(s)}>
           {s.imageUrl && <SpeciesImage src={s.imageUrl} alt={s.scientificName} />}
           <SpeciesName>{s.scientificName}</SpeciesName>
           <SpeciesInfo>Common Name: {s.vernacularName}</SpeciesInfo>
