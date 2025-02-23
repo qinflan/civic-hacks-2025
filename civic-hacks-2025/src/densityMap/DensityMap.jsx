@@ -7,7 +7,7 @@ import VectorTileLayer from 'ol/layer/VectorTile';
 import VectorTileSource from 'ol/source/VectorTile';
 import MVT from 'ol/format/MVT';
 
-export default function DensityMap(taxonKey) {
+export default function DensityMap({taxonKey}) {
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function DensityMap(taxonKey) {
     map.addLayer(layer);
 
     return () => map.setTarget(undefined);
-  }, []);
+  }, [taxonKey]);
 
-  return <div ref={mapRef} style={{ width: "100vw", height: "100vh" }} />;
+  return <div ref={mapRef} style={{ width: "80vw", height: "65vh" }} />;
 }
