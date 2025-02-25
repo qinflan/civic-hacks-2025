@@ -124,8 +124,8 @@ const SpeciesFetcher = () => {
           lat2,
           lon1,
           lon2,
-          mapLat: 37.7749, // default for map
-          mapLng: -122.4194 // default for map
+          mapLat: lat1, // default for map
+          mapLng: lon2 // default for map
         });
       } catch (err) {
         setError('Unable to fetch location.');

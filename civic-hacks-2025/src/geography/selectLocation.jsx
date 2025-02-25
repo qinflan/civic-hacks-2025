@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { GoogleMap, Marker, useJsApiLoader, Autocomplete } from '@react-google-maps/api';
+import getLocation from './getCurrentLocation';
 
 // Google Maps API key from environment variables
 const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
@@ -29,7 +30,7 @@ const mapOptions = {
 };
 
 const SelectLocation = ({updatePosition}) => {
-  const [position, setPosition] = useState({ lat: 37.7749, lng: -122.4194 }); // default san francisco
+  const [position, setPosition] = useState(null);
   const [autocomplete, setAutocomplete] = useState(null);
   const mapRef = useRef(null);  // Keep a ref for the map
 
@@ -38,6 +39,21 @@ const SelectLocation = ({updatePosition}) => {
     googleMapsApiKey: apiKey,
     libraries,
   });
+
+  // Fetch user's current location on mount
+  useEffect(() => {
+    const fetchLocation = async () => {
+      try {
+        const { lat1, lon1, lat2, lon2 } = await getLocation();
+        setPosition({ lat: lat1, lng: lon1 });
+        updatePosition({ lat: lat1, lng: lon1, lat1, lat2, lon1, lon2 });
+      } catch (error) {
+        console.error("Error fetching location:", error);
+      }
+    };
+
+    fetchLocation();
+  }, []);
 
   const onPlaceChanged = () => {
     if (autocomplete) {
@@ -62,7 +78,7 @@ const SelectLocation = ({updatePosition}) => {
 
   const center = position;
 
-  if (!isLoaded) return <p>Loading map...</p>;
+  if (!isLoaded || !position) return <p>Loading map...</p>;
 
   else {
     return (
