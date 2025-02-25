@@ -55,15 +55,12 @@ const SearchPage = () => {
          .search-container {
            max-width: 350px;
            margin: 0 auto;
-           background: none;
            padding: 20px;
            border-radius: 12px;
-           box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        //    width: 350px;
-        //    position: relative;
-        //    display: flex;
-        //    flex-direction: column;
-        //    align-items: center;
+           position: relative;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
          }
 
 
@@ -84,11 +81,12 @@ const SearchPage = () => {
            font-size: 16px;
            transition: all 0.3s ease;
            box-sizing: border-box;
+           background-color: #FFECDB;
          }
 
 
          .search-input:focus {
-           border-color: #007bff;
+           border-color: #9BCB60;
            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
          }
 

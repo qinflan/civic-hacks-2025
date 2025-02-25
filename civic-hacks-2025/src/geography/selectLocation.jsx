@@ -6,7 +6,7 @@ const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 const libraries = ["places"];
 
 const mapContainerStyle = {
-  width: "400px",
+  width: "80vw",
   height: "400px",
   position: "relative",
   borderRadius: "15px",
