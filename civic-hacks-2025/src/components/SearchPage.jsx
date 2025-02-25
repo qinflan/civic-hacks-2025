@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import getOccurrenceByGeo from "../API/getOccurrenceByGeo.js";
-
+import { FaSearch } from 'react-icons/fa';
 
 const SearchPage = () => {
   const [topics, setTopics] = useState([]);
@@ -45,24 +45,21 @@ const SearchPage = () => {
     scrollToSection(encodedName);
   };
   
-  
   return (
     <div>
-      {/* Embedded CSS inside <style> tag */}
       <style>
        {`
          /* Search Container */
          .search-container {
            max-width: 350px;
-           margin: 0 auto;
+           margin-left: auto; /* Align to the right */
            padding: 20px;
            border-radius: 12px;
            position: relative;
            display: flex;
            flex-direction: column;
-           align-items: center;
+           align-items: flex-end; /* Align content to the right */
          }
-
 
          /* Search Box */
          .search-box {
@@ -70,11 +67,10 @@ const SearchPage = () => {
            width: 100%;
          }
 
-
          /* Search Input */
          .search-input {
            width: 100%;
-           padding: 12px 45px 12px 15px;
+           padding: 12px 45px 12px 40px; /* Increased left padding for icon */
            border: 2px solid #ddd;
            border-radius: 30px;
            outline: none;
@@ -84,12 +80,19 @@ const SearchPage = () => {
            background-color: #FFECDB;
          }
 
-
          .search-input:focus {
            border-color: #9BCB60;
            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
          }
 
+         /* Search Icon */
+         .search-icon {
+           position: absolute;
+           left: 15px;
+           top: 50%;
+           transform: translateY(-50%);
+           color: #888;
+         }
 
          /* Dropdown */
          .dropdown {
@@ -107,7 +110,6 @@ const SearchPage = () => {
            z-index: 10;
          }
 
-
          /* Dropdown Item */
          .dropdown-item {
            display: block;
@@ -121,17 +123,15 @@ const SearchPage = () => {
            transition: background 0.3s ease;
          }
 
-
          .dropdown-item:hover {
            background: #f1f1f1;
          }
        `}
      </style>
 
-
-
       <div className="search-container">
         <div className="search-box">
+          <FaSearch className="search-icon" />
           <input
             type="text"
             placeholder="Search..."

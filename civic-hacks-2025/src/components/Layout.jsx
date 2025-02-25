@@ -5,7 +5,6 @@ import SearchPage from './SearchPage';
 import { IoMenu } from "react-icons/io5";
 import { SiTreehouse } from "react-icons/si";
 
-
 const Header = styled.header`
   background-color: #3A2F27;
   padding: 20px;
@@ -13,6 +12,17 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+`;
+
+const LeftSection = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const RightSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;
 
 const Title = styled.h1`
@@ -29,7 +39,6 @@ const Hamburger = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
 `;
 
 const Nav = styled.nav`
@@ -39,12 +48,12 @@ const Nav = styled.nav`
   justify-content: center;
   z-index: 999;
   background-color: #3A2F27;
-  position: fixed;  // Change to fixed
+  position: fixed;
   border-radius: 20px;
-  top: 110px;  // Add top positioning
-  right: ${({ isOpen }) => (isOpen ? '0' : '-200px')};  // Change left to right
-  width: 200px; // Set a smaller width for the menu
-  transition: right 0.3s ease-in-out; // Smooth transition for opening/closing
+  top: 110px;
+  right: ${({ isOpen }) => (isOpen ? '0' : '-200px')};
+  width: 200px;
+  transition: right 0.3s ease-in-out;
   border-bottom: 5%;
 `;
 
@@ -82,9 +91,13 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header>
-        <Title>ecoquest<SiTreehouse /></Title>
-        <SearchPage/>
-        <Hamburger><IoMenu size={36} onClick={toggleMenu} isOpen={isOpen}/></Hamburger>
+        <LeftSection>
+          <Title>ecoquest<SiTreehouse /></Title>
+        </LeftSection>
+        <RightSection>
+          <SearchPage />
+          <Hamburger><IoMenu size={36} onClick={toggleMenu} isOpen={isOpen}/></Hamburger>
+        </RightSection>
       </Header>
       <Nav isOpen={isOpen}>
         <NavList>
