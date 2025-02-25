@@ -78,26 +78,31 @@ const AboutPage = () => {
         name: "HungHsu Chen", 
         major: "Computer Science", 
         linkedin: "https://www.linkedin.com/in/chhallen/",
+        github: "https://github.com/allenLQVE",
       },
       { 
         name: "Xiakun Zeng", 
         major: "Computer Science & Math", 
         linkedin: "https://www.linkedin.com/in/xiankun-zeng-165b5b34a/",
+        github: "https://github.com/marco-hub-g",
       },
       { 
-        name: "Jerry ", 
+        name: "Jerry Teixeira", 
         major: "Computer Science & Biology", 
         linkedin: "https://www.linkedin.com/in/jerry-teixeira-a15b111aa/",
+        github: "https://github.com/JerryBLT",
       },
       { 
         name: "Quinn", 
         major: "Information Technology", 
         linkedin: "https://www.linkedin.com/in/quinn-flanigan/",
+        github: "https://github.com/qinflan",
       },
       { 
         name: "Lingjie Su", 
         major: "Econ & CS", 
-        linkedin: "https://www.linkedin.com/in/lingjie-su-74267734b/"
+        linkedin: "https://www.linkedin.com/in/lingjie-su-74267734b/",
+        github: "https://github.com/Lenoisalive"
       }
     ];
 
@@ -130,10 +135,10 @@ const AboutPage = () => {
             <AuthorName>{author.name}</AuthorName>
             <AuthorMajor>{author.major}</AuthorMajor>
             <AuthorSocial>
-              <SocialLink href={author.linkedin} target="_blank" rel="noopener noreferrer">
+              <SocialLink href={author.linkedin} target="_blank" rel="author linkedin">
                 <FaLinkedin />
               </SocialLink>
-              <SocialLink href={author.github} targer="_blank" rel="noopener noreferrer">
+              <SocialLink href={author.github} target="_blank" rel="author github">
                 <FaGithub/>
               </SocialLink>
             </AuthorSocial>
@@ -144,8 +149,8 @@ const AboutPage = () => {
         <Section>
           <h2>Project Repository</h2>
           <p>
-            View the source code for this project on GitHub:
-            <StyledLink href={githubRepo} target="_blank" rel="noopener noreferrer">
+            View the source code for this project on GitHub:{" "}
+            <StyledLink href="https://github.com/qinflan/ecoquest" target="_blank" rel="our repository">
               GitHub Repository
             </StyledLink>
           </p>
